@@ -1,6 +1,8 @@
 'use client';
 
 import { useEffect } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
 
 export default function Home() {
   useEffect(() => {
@@ -24,95 +26,381 @@ export default function Home() {
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
-              <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-lg">M</span>
-              </div>
-              <div>
-                <h1 className="text-2xl font-bold text-white">Mufeed IFE</h1>
-                <p className="text-sm text-gray-300">Premium Entertainment</p>
-              </div>
+              <div className="text-3xl font-bold text-blue-400">MUFEED</div>
             </div>
-            <div className="hidden md:flex items-center space-x-6 text-sm text-gray-300">
-              <span>Flight: AF123</span>
-              <span>•</span>
-              <span>Paris → New York</span>
-              <span>•</span>
-              <span>2h 45m remaining</span>
-            </div>
+            <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition-colors">
+              Découvrir
+            </button>
           </div>
         </div>
       </header>
 
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Welcome Section */}
-        <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-6xl font-bold text-white mb-4">
-            Bienvenue à bord
-          </h2>
-          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-            Découvrez notre système de divertissement en vol premium avec une interface moderne et responsive
-          </p>
-        </div>
-
-        {/* Feature Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-          {/* Movies & TV */}
-          <div className="group bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:border-white/20 transition-all duration-300 hover:scale-105">
-            <div className="w-12 h-12 bg-gradient-to-br from-red-500 to-pink-600 rounded-xl flex items-center justify-center mb-4">
-              <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
-              </svg>
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        {/* Section 1: Hero Section */}
+        <section className="py-20 relative">
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 items-center">
+            <div className="lg:col-span-3 text-center lg:text-left">
+              <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
+                Découvrez et apprenez <span className="text-blue-400">la langue</span> et <span className="text-blue-400">les coutumes locales</span> en toute simplicité.
+              </h1>
+              <p className="text-lg text-gray-300 mb-8">
+                Plongez dans un voyage immersive et enrichissez votre expérience grâce à des outils interactifs et intuitifs.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                <Link href="/countries">
+                  <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors">
+                    Commencer
+                  </button>
+                </Link>
+                <button className="border border-white/30 hover:border-white/50 text-white px-8 py-3 rounded-lg font-semibold transition-colors">
+                  Découvrir les destinations
+                </button>
+              </div>
             </div>
-            <h3 className="text-xl font-semibold text-white mb-2">Films & Séries</h3>
-            <p className="text-gray-400">Plus de 1000 films et séries en streaming HD</p>
-          </div>
-
-          {/* Music */}
-          <div className="group bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:border-white/20 transition-all duration-300 hover:scale-105">
-            <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl flex items-center justify-center mb-4">
-              <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
-              </svg>
-            </div>
-            <h3 className="text-xl font-semibold text-white mb-2">Musique</h3>
-            <p className="text-gray-400">Bibliothèque musicale avec tous les genres</p>
-          </div>
-
-          {/* Games */}
-          <div className="group bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:border-white/20 transition-all duration-300 hover:scale-105">
-            <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-indigo-600 rounded-xl flex items-center justify-center mb-4">
-              <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1.5a2.5 2.5 0 100-5H9v5zm0 0H7.5a2.5 2.5 0 000 5H9v-5z" />
-              </svg>
-            </div>
-            <h3 className="text-xl font-semibold text-white mb-2">Jeux</h3>
-            <p className="text-gray-400">Collection de jeux interactifs</p>
-          </div>
-        </div>
-
-        {/* Status Bar */}
-        <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-            <div>
-              <div className="text-2xl font-bold text-white">32,000 ft</div>
-              <div className="text-sm text-gray-400">Altitude</div>
-            </div>
-            <div>
-              <div className="text-2xl font-bold text-white">850 km/h</div>
-              <div className="text-sm text-gray-400">Vitesse</div>
-            </div>
-            <div>
-              <div className="text-2xl font-bold text-white">-45°C</div>
-              <div className="text-sm text-gray-400">Température ext.</div>
-            </div>
-            <div>
-              <div className="text-2xl font-bold text-white">2h 45m</div>
-              <div className="text-sm text-gray-400">Temps restant</div>
+            
+            {/* Airplane image */}
+            <div className="lg:col-span-2 flex justify-center">
+              <div className="relative w-full h-96 max-w-lg">
+                <Image
+                  src="/images/elements/avion.png"
+                  alt="Avion"
+                  fill
+                  className="object-contain"
+                />
+              </div>
             </div>
           </div>
-        </div>
+
+          {/* Country flags row */}
+          <div className="flex justify-center items-center gap-4 mt-16 flex-wrap">
+            <div className="relative w-12 h-8 rounded overflow-hidden">
+              <Image
+                src="/images/drapeaux/Brazilpng.png"
+                alt="Brésil"
+                fill
+                className="object-cover"
+              />
+            </div>
+            <div className="relative w-12 h-8 rounded overflow-hidden">
+              <Image
+                src="/images/drapeaux/Germany.png"
+                alt="Allemagne"
+                fill
+                className="object-cover"
+              />
+            </div>
+            <div className="relative w-12 h-8 rounded overflow-hidden">
+              <Image
+                src="/images/drapeaux/UK.png"
+                alt="Royaume-Uni"
+                fill
+                className="object-cover"
+              />
+            </div>
+            <div className="relative w-12 h-8 rounded overflow-hidden">
+              <Image
+                src="/images/drapeaux/Morocco.png"
+                alt="Maroc"
+                fill
+                className="object-cover"
+              />
+            </div>
+            <div className="relative w-12 h-8 rounded overflow-hidden">
+              <Image
+                src="/images/drapeaux/Emirates.png"
+                alt="Émirats Arabes Unis"
+                fill
+                className="object-cover"
+              />
+            </div>
+            <div className="relative w-12 h-8 rounded overflow-hidden">
+              <Image
+                src="/images/drapeaux/Albaniapng.png"
+                alt="Albanie"
+                fill
+                className="object-cover"
+              />
+            </div>
+          </div>
+        </section>
+
+        {/* Section 2: Destinations */}
+        <section className="py-20">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+              Et si votre voyage commençait ici ?
+            </h2>
+            <p className="text-gray-300 text-lg">
+              expressions, coutumes et immersion garantie.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Brésil */}
+            <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10 hover:border-white/20 transition-all duration-300 hover:scale-105">
+              <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-yellow-500 rounded-full flex items-center justify-center mb-6 mx-auto">
+                <span className="text-2xl">🇧🇷</span>
+              </div>
+              <h3 className="text-2xl font-bold text-white text-center mb-4">Brésil</h3>
+              <p className="text-gray-300 text-center mb-6">
+                Apprenez le portugais brésilien pour plonger dans le rythme de la samba et des festivals vibrants.
+              </p>
+              <div className="text-center">
+                <button className="text-blue-400 hover:text-blue-300 font-semibold transition-colors">
+                  Commencer →
+                </button>
+              </div>
+            </div>
+
+            {/* Japon */}
+            <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10 hover:border-white/20 transition-all duration-300 hover:scale-105">
+              <div className="w-16 h-16 bg-gradient-to-br from-red-500 to-white rounded-full flex items-center justify-center mb-6 mx-auto">
+                <span className="text-2xl">🇯🇵</span>
+              </div>
+              <h3 className="text-2xl font-bold text-white text-center mb-4">Japon</h3>
+              <p className="text-gray-300 text-center mb-6">
+                Maîtrisez les expressions clés en japonais pour explorer le Pays du Soleil Levant avec aisance et respect.
+              </p>
+              <div className="text-center">
+                <button className="text-blue-400 hover:text-blue-300 font-semibold transition-colors">
+                  Commencer →
+                </button>
+              </div>
+            </div>
+
+            {/* France */}
+            <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10 hover:border-white/20 transition-all duration-300 hover:scale-105">
+              <div className="w-16 h-16 bg-gradient-to-br from-blue-500 via-white to-red-500 rounded-full flex items-center justify-center mb-6 mx-auto">
+                <span className="text-2xl">🇫🇷</span>
+              </div>
+              <h3 className="text-2xl font-bold text-white text-center mb-4">France</h3>
+              <p className="text-gray-300 text-center mb-6">
+                Parlez comme un vrai Parisien et plongez dans l&apos;atmosphère unique de la Ville Lumière.
+              </p>
+              <div className="text-center">
+                <button className="text-blue-400 hover:text-blue-300 font-semibold transition-colors">
+                  Commencer →
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Section 3: Flight Time Learning */}
+        <section className="py-20 bg-white/5 backdrop-blur-sm rounded-3xl border border-white/10 my-20">
+          <div className="max-w-6xl mx-auto px-8">
+            <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 items-start">
+              <div className="lg:col-span-2 order-2 lg:order-1 mt-8">
+                {/* Airplane map image */}
+                <div className="relative w-full h-[400px]">
+                  <Image
+                    src="/images/elements/avionmap.png"
+                    alt="Carte avec avion"
+                    fill
+                    className="object-cover rounded-2xl"
+                  />
+                </div>
+              </div>
+              
+              <div className="lg:col-span-3 order-1 lg:order-2">
+                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
+                 Utilisez votre <span className="text-red-400">temps de vol</span> pour apprendre les bases de votre destination.
+                </h2>  
+                <p className="text-gray-300 text-lg mb-8">
+                  Chaque pays a ses propres codes et expressions uniques. Découvrez comment vous intégrer et interagir avec les locaux grâce à nos conseils linguistiques et culturels.
+                </p>
+                <button className="border border-white/30 hover:border-white/50 text-white px-8 py-3 rounded-lg font-semibold transition-colors">
+                  Découvrir
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Section 4: Travel Success Keys */}
+        <section className="py-20">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+              Les Clés pour un Voyage Réussi
+            </h2>
+            <p className="text-gray-300 text-lg max-w-3xl mx-auto">
+              Besoin de négocier dans un souk, de commander un plat typique ou d&apos;éviter un faux-pas culturel ? Utilisez votre temps de vol
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+            {/* Travel tips cards */}
+            <div className="bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/10 hover:border-white/20 transition-all duration-300 hover:scale-105">
+              <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-600 rounded-lg flex items-center justify-center mb-3 mx-auto overflow-hidden">
+                <div className="relative w-8 h-6">
+                  <Image
+                    src="/images/drapeaux/Brazilpng.png"
+                    alt="Brésil"
+                    fill
+                    className="object-cover rounded"
+                  />
+                </div>
+              </div>
+              <p className="text-white text-sm text-center font-medium">5 règles de politesse essentielles</p>
+            </div>
+
+            <div className="bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/10 hover:border-white/20 transition-all duration-300 hover:scale-105">
+              <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-600 rounded-lg flex items-center justify-center mb-3 mx-auto overflow-hidden">
+                <div className="relative w-8 h-6">
+                  <Image
+                    src="/images/drapeaux/Brazilpng.png"
+                    alt="Brésil"
+                    fill
+                    className="object-cover rounded"
+                  />
+                </div>
+              </div>
+              <p className="text-white text-sm text-center font-medium">10 expressions pour se faire des amis</p>
+            </div>
+
+            <div className="bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/10 hover:border-white/20 transition-all duration-300 hover:scale-105">
+              <div className="w-12 h-12 bg-gradient-to-br from-yellow-500 to-orange-600 rounded-lg flex items-center justify-center mb-3 mx-auto overflow-hidden">
+                <div className="relative w-8 h-6">
+                  <Image
+                    src="/images/drapeaux/Germany.png"
+                    alt="Allemagne"
+                    fill
+                    className="object-cover rounded"
+                  />
+                </div>
+              </div>
+              <p className="text-white text-sm text-center font-medium">15 phrases Clés pour les affaires</p>
+            </div>
+
+            <div className="bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/10 hover:border-white/20 transition-all duration-300 hover:scale-105">
+              <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-lg flex items-center justify-center mb-3 mx-auto overflow-hidden">
+                <div className="relative w-8 h-6">
+                  <Image
+                    src="/images/drapeaux/UK.png"
+                    alt="Royaume-Uni"
+                    fill
+                    className="object-cover rounded"
+                  />
+                </div>
+              </div>
+              <p className="text-white text-sm text-center font-medium">8 phrases pour négocier en toute sérénité</p>
+            </div>
+
+            <div className="bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/10 hover:border-white/20 transition-all duration-300 hover:scale-105">
+              <div className="w-12 h-12 bg-gradient-to-br from-pink-500 to-rose-600 rounded-lg flex items-center justify-center mb-3 mx-auto overflow-hidden">
+                <div className="relative w-8 h-6">
+                  <Image
+                    src="/images/drapeaux/Morocco.png"
+                    alt="Maroc"
+                    fill
+                    className="object-cover rounded"
+                  />
+                </div>
+              </div>
+              <p className="text-white text-sm text-center font-medium">8 phrases pour découvrir les légendes</p>
+            </div>
+
+            <div className="bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/10 hover:border-white/20 transition-all duration-300 hover:scale-105">
+              <div className="w-12 h-12 bg-gradient-to-br from-red-500 to-pink-600 rounded-lg flex items-center justify-center mb-3 mx-auto overflow-hidden">
+                <div className="relative w-8 h-6">
+                  <Image
+                    src="/images/drapeaux/Brazilpng.png"
+                    alt="Brésil"
+                    fill
+                    className="object-cover rounded"
+                  />
+                </div>
+              </div>
+              <p className="text-white text-sm text-center font-medium">10 expressions pour découvrir avec les locaux</p>
+            </div>
+
+            <div className="bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/10 hover:border-white/20 transition-all duration-300 hover:scale-105">
+              <div className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-lg flex items-center justify-center mb-3 mx-auto overflow-hidden">
+                <div className="relative w-8 h-6">
+                  <Image
+                    src="/images/drapeaux/Brazilpng.png"
+                    alt="Brésil"
+                    fill
+                    className="object-cover rounded"
+                  />
+                </div>
+              </div>
+              <p className="text-white text-sm text-center font-medium">8 phrases Clés à ne pas oublier</p>
+            </div>
+
+            <div className="bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/10 hover:border-white/20 transition-all duration-300 hover:scale-105">
+              <div className="w-12 h-12 bg-gradient-to-br from-teal-500 to-green-600 rounded-lg flex items-center justify-center mb-3 mx-auto overflow-hidden">
+                <div className="relative w-8 h-6">
+                  <Image
+                    src="/images/drapeaux/Germany.png"
+                    alt="Allemagne"
+                    fill
+                    className="object-cover rounded"
+                  />
+                </div>
+              </div>
+              <p className="text-white text-sm text-center font-medium">7 traditions ancestrales à respecter</p>
+            </div>
+
+            <div className="bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/10 hover:border-white/20 transition-all duration-300 hover:scale-105">
+              <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-red-600 rounded-lg flex items-center justify-center mb-3 mx-auto overflow-hidden">
+                <div className="relative w-8 h-6">
+                  <Image
+                    src="/images/drapeaux/UK.png"
+                    alt="Royaume-Uni"
+                    fill
+                    className="object-cover rounded"
+                  />
+                </div>
+              </div>
+              <p className="text-white text-sm text-center font-medium">Utiliser et expressions pour voyager en toute sérénité</p>
+            </div>
+
+            <div className="bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/10 hover:border-white/20 transition-all duration-300 hover:scale-105">
+              <div className="w-12 h-12 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-lg flex items-center justify-center mb-3 mx-auto overflow-hidden">
+                <div className="relative w-8 h-6">
+                  <Image
+                    src="/images/drapeaux/Emirates.png"
+                    alt="Émirats Arabes Unis"
+                    fill
+                    className="object-cover rounded"
+                  />
+                </div>
+              </div>
+              <p className="text-white text-sm text-center font-medium">8 règles de savoir-vivre à respecter</p>
+            </div>
+          </div>
+        </section>
+
       </main>
+
+      {/* Footer */}
+      <footer className="bg-black/30 backdrop-blur-sm border-t border-white/10 mt-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="text-center">
+            <p className="text-gray-300 text-lg mb-6 max-w-4xl mx-auto">
+              MUFEED vous accompagne dans votre découverte du monde en vous aidant à apprendre les bases linguistiques et culturelles de votre prochaine destination.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row justify-center items-center gap-6 mb-8">
+              <button className="text-blue-400 hover:text-blue-300 font-semibold transition-colors">
+                Contact
+              </button>
+              <button className="text-blue-400 hover:text-blue-300 font-semibold transition-colors">
+                À propos
+              </button>
+            </div>
+            
+            <div className="border-t border-white/10 pt-6">
+              <p className="text-gray-400 text-sm">
+                © 2026, All Rights Reserved
+              </p>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
