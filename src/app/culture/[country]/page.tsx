@@ -44,12 +44,6 @@ export default function CultureCategoriesPage() {
       icon: '🎉',
       color: 'from-yellow-500 to-orange-500'
     },
-    {
-      title: 'Faux pas à éviter',
-      description: 'Erreurs culturelles communes et comment les éviter',
-      icon: '⚠️',
-      color: 'from-red-500 to-pink-500'
-    }
   ];
 
   return (
@@ -72,7 +66,7 @@ export default function CultureCategoriesPage() {
         {/* Title Section */}
         <div className="text-center mb-12">
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
-            Découvrez la culture locale
+            Découvrez les coutumes locale
           </h1>
           <p className="text-gray-300 text-lg">
             {country ? decodeURIComponent(country) : 'Destination sélectionnée'}
@@ -86,17 +80,19 @@ export default function CultureCategoriesPage() {
               key={index} 
               href={`/culture/${country}/lesson?category=${encodeURIComponent(category.title)}`}
             >
-              <div className="group bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:border-white/30 transition-all duration-300 hover:scale-105 cursor-pointer">
-                <div className="flex flex-col items-center space-y-4">
-                  {/* Icon with gradient background */}
-                  <div className={`w-16 h-16 rounded-full bg-gradient-to-r ${category.color} flex items-center justify-center text-2xl group-hover:scale-110 transition-transform duration-300`}>
-                    {category.icon}
+              <div className="group bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:border-white/30 transition-all duration-300 hover:scale-105 cursor-pointer h-full">
+                <div className="flex flex-col items-center space-y-4 h-full justify-between">
+                  <div className="flex flex-col items-center space-y-4">
+                    {/* Icon with gradient background */}
+                    <div className={`w-16 h-16 rounded-full bg-gradient-to-r ${category.color} flex items-center justify-center text-2xl group-hover:scale-110 transition-transform duration-300`}>
+                      {category.icon}
+                    </div>
+                    
+                    {/* Title */}
+                    <h3 className="text-xl font-bold text-white text-center group-hover:text-green-300 transition-colors">
+                      {category.title}
+                    </h3>
                   </div>
-                  
-                  {/* Title */}
-                  <h3 className="text-xl font-bold text-white text-center group-hover:text-green-300 transition-colors">
-                    {category.title}
-                  </h3>
                   
                   {/* Description */}
                   <p className="text-gray-300 text-sm text-center leading-relaxed">

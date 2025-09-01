@@ -11,61 +11,71 @@ export default function CategoriesPage() {
 
   const categories = [
     {
-      title: 'Aéroport & Formalités',
+      title: 'Aéroport',
+      id: 'airport',
       description: 'Vocabulaire pour les contrôles, bagages et procédures',
       icon: '✈️',
       color: 'from-blue-500 to-cyan-500'
     },
     {
       title: 'Hébergement',
+      id: 'accommodation',
       description: 'Communication avec les hôtels et logements',
       icon: '🏨',
       color: 'from-purple-500 to-pink-500'
     },
     {
-      title: 'Restaurants & Nourriture',
+      title: 'Restaurant',
+      id: 'restaurant',
       description: 'Commander, payer et découvrir la cuisine locale',
       icon: '🍽️',
       color: 'from-orange-500 to-red-500'
     },
     {
       title: 'Transports locaux',
+      id: 'transport',
       description: 'Bus, métro, taxi et moyens de transport',
       icon: '🚌',
       color: 'from-green-500 to-emerald-500'
     },
     {
       title: 'Salutations & Politesse',
+      id: 'greetings',
       description: 'Formules de courtoisie et interactions sociales',
-      icon: '🤝',
+      icon: '👋',
       color: 'from-indigo-500 to-blue-500'
     },
     {
       title: 'Shopping & Argent',
+      id: 'shopping',
       description: 'Achats, négociation et gestion financière',
-      icon: '💰',
+      icon: '🛍️',
       color: 'from-yellow-500 to-orange-500'
     },
     {
       title: 'Orientation',
+      id: 'orientation',
       description: 'Demander son chemin et se repérer',
-      icon: '🗺️',
+      icon: '🧭',
       color: 'from-teal-500 to-green-500'
     },
     {
-      title: 'Santé & Sécurité',
+      title: 'Santé & sécurité',
+      id: 'health',
       description: 'Urgences médicales et situations de sécurité',
       icon: '🏥',
       color: 'from-red-500 to-pink-500'
     },
     {
       title: 'Urgences administratives',
+      id: 'admin',
       description: 'Consulats, police et démarches officielles',
       icon: '📋',
       color: 'from-gray-500 to-slate-500'
     },
     {
       title: 'Événements & Loisirs',
+      id: 'events',
       description: 'Activités culturelles et divertissements',
       icon: '🎭',
       color: 'from-violet-500 to-purple-500'
@@ -119,7 +129,12 @@ export default function CategoriesPage() {
           {categories.map((category, index) => (
             <Link 
               key={index} 
-              href={`/learn/${country}/lesson?method=${method}&category=${encodeURIComponent(category.title)}`}
+              href={method === 'mini-quiz' 
+                ? `/learn/${country}/lesson/quiz?category=${category.id}`
+                : method === 'exercices-pratiques'
+                ? `/learn/${country}/lesson/exercise?category=${category.id}`
+                : `/learn/${country}/lesson?method=${method}&category=${encodeURIComponent(category.title)}`
+              }
             >
               <div className="group bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:border-white/30 transition-all duration-300 hover:scale-105 cursor-pointer">
                 <div className="flex flex-col items-center space-y-4">
@@ -146,7 +161,7 @@ export default function CategoriesPage() {
         {/* Back Button */}
         <div className="text-center">
           <Link 
-            href={`/learn/${country}`}
+            href={`/language/${country}`}
             className="inline-flex items-center text-gray-400 hover:text-white transition-colors"
           >
             <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -21,7 +21,7 @@ export default function CountriesPage() {
     { name: 'Bangladesh', flag: 'Bangladesh.png', code: 'bn' },
     { name: 'Japon', flag: 'Japan.png', code: 'ja' },
     { name: 'Espagne', flag: 'Spain.png', code: 'es' },
-    { name: 'Afghanistan', flag: 'Afghanistan.png', code: 'prs' },
+    { name: 'Maroc', flag: 'Morocco.png', code: 'ma' },
     { name: 'Chine', flag: 'China.png', code: 'zh' },
     { name: 'Danemark', flag: 'Denmark.png', code: 'da' },
     { name: 'Arabie Saoudite', flag: 'Saudi.png', code: 'ar' },
