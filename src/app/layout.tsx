@@ -24,8 +24,8 @@ export const metadata: Metadata = {
     title: "Mufeed IFE",
   },
   icons: {
-    icon: "/icon-192x192.png",
-    apple: "/icon-192x192.png",
+    icon: "/images/logo/logoMufeed.png",
+    apple: "/images/logo/logoMufeed.png",
   },
 };
 

@@ -27,6 +27,8 @@ interface ExercisePhrase {
 
 interface DragDropExerciseProps {
   phrases: ExercisePhrase[];
+  country?: string;
+  category?: string;
   onValidate: (matches: { phraseId: string; translationId: string }[]) => void;
   onNext?: () => void;
   canGoNext?: boolean;
@@ -164,7 +166,7 @@ function DroppableZone({
   );
 }
 
-export default function DragDropExercise({ phrases, onValidate, onNext, canGoNext }: DragDropExerciseProps) {
+export default function DragDropExercise({ phrases, country, category, onValidate, onNext, canGoNext }: DragDropExerciseProps) {
   const [phraseItems, setPhraseItems] = useState<DroppableItem[]>([]);
   const [translationItems, setTranslationItems] = useState<DroppableItem[]>([]);
   const [matches, setMatches] = useState<Match[]>([]);
@@ -286,6 +288,22 @@ export default function DragDropExercise({ phrases, onValidate, onNext, canGoNex
     setShowResults(true);
   };
 
+  const handleComplete = async (finalScore: number) => {
+    // Sauvegarder la progression
+    if (country && category) {
+      const { saveActivityProgress } = await import('@/lib/progress-tracker');
+      saveActivityProgress({
+        country: country,
+        module: 'language',
+        activityType: 'exercise',
+        category: category,
+        score: finalScore,
+        completed: true,
+        timestamp: Date.now()
+      });
+    }
+  };
+
   const handleRetry = () => {
     // Réinitialiser l'exercice
     setMatches([]);
@@ -314,10 +332,14 @@ export default function DragDropExercise({ phrases, onValidate, onNext, canGoNex
     setTranslationItems(shuffledTranslations);
   };
 
-  const handleNext = () => {
+  const handleNext = async () => {
     if (onNext) {
       onNext();
     } else {
+      // Sauvegarder la progression avant de terminer
+      if (results && country && category) {
+        await handleComplete(results.score);
+      }
       onValidate(matches);
     }
   };
@@ -464,8 +486,8 @@ export default function DragDropExercise({ phrases, onValidate, onNext, canGoNex
               
               <div className="text-center text-lg text-gray-300 mb-6">
                 {(results?.score || 0) >= 70 ? 
-                  '🎉 Excellent travail ! Vous maîtrisez bien ces expressions.' : 
-                  '💪 Continuez à vous entraîner, vous progressez !'
+                  'Excellent travail ! Vous maîtrisez bien ces expressions.' : 
+                  'Continuez à vous entraîner, vous progressez !'
                 }
               </div>
             </div>
@@ -476,18 +498,13 @@ export default function DragDropExercise({ phrases, onValidate, onNext, canGoNex
                 onClick={handleRetry}
                 className="bg-gradient-to-r from-blue-500 to-blue-400 hover:from-blue-600 hover:to-blue-500 text-white px-6 py-2 rounded-lg transition-all duration-300 font-semibold"
               >
-                🔄 Refaire cet exercice
+                Refaire cet exercice
               </button>
               <button
                 onClick={handleNext}
-                disabled={!canGoNext}
-                className={`px-6 py-2 rounded-lg font-semibold transition-all duration-300 ${
-                  canGoNext
-                    ? 'bg-gradient-to-r from-green-500 to-green-400 hover:from-green-600 hover:to-green-500 text-white'
-                    : 'bg-gradient-to-r from-gray-600 to-gray-500 text-gray-400 cursor-not-allowed'
-                }`}
+                className="bg-gradient-to-r from-green-500 to-green-400 hover:from-green-600 hover:to-green-500 text-white px-6 py-2 rounded-lg font-semibold transition-all duration-300"
               >
-                {canGoNext ? '➡️ Exercice suivant' : '✅ Exercices terminés'}
+                {canGoNext ? 'Exercice suivant' : 'Exercices terminés'}
               </button>
             </div>
           </div>

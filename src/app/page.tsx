@@ -106,10 +106,15 @@ export default function Home() {
               <p className="text-lg text-gray-300 mb-8">
                 Plongez dans un voyage immersive et enrichissez votre expérience grâce à des outils interactifs et intuitifs.
               </p>
-              <div className="flex justify-center lg:justify-start">
+              <div className="flex justify-center lg:justify-start gap-4">
                 <Link href="/countries">
                   <button className="border border-white/30 hover:border-white/50 text-white px-8 py-3 rounded-lg font-semibold transition-colors">
                     Découvrir les destinations
+                  </button>
+                </Link>
+                <Link href="/dashboard">
+                  <button className="bg-gradient-to-r from-purple-500 to-purple-400 hover:from-purple-600 hover:to-purple-500 text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300">
+                    Dashboard
                   </button>
                 </Link>
               </div>

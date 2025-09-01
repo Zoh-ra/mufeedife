@@ -15,6 +15,7 @@ export default function CultureLessonPage() {
   const [showQuiz, setShowQuiz] = useState(false);
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const [showResult, setShowResult] = useState(false);
+  const [isCorrect, setIsCorrect] = useState(false);
 
   const currentTip = getCulturalTip(decodeURIComponent(country), decodeURIComponent(category));
 
@@ -36,17 +37,37 @@ export default function CultureLessonPage() {
 
   const handleQuizAnswer = (answerIndex: number) => {
     setSelectedAnswer(answerIndex);
-    setShowResult(true);
   };
 
   const handleStartQuiz = () => {
     setShowQuiz(true);
   };
 
+  const handleQuizSubmit = async () => {
+    if (!selectedAnswer) return;
+    
+    setShowResult(true);
+    const isCorrect = selectedAnswer === currentTip.quiz.correctAnswer;
+    setIsCorrect(isCorrect);
+
+    // Sauvegarder la progression
+    const { saveActivityProgress } = await import('@/lib/progress-tracker');
+    saveActivityProgress({
+      country: country,
+      module: 'culture',
+      activityType: 'cultural-lesson',
+      category: currentTip.category,
+      score: isCorrect ? 100 : 0,
+      completed: true,
+      timestamp: Date.now()
+    });
+  };
+
   const resetLesson = () => {
     setShowQuiz(false);
     setSelectedAnswer(null);
     setShowResult(false);
+    setIsCorrect(false);
   };
 
   return (
@@ -123,14 +144,31 @@ export default function CultureLessonPage() {
                           : index === selectedAnswer
                           ? 'bg-red-500/20 text-red-300 border-2 border-red-400'
                           : 'bg-white/5 text-gray-400 border border-white/10'
+                        : selectedAnswer === index
+                        ? 'bg-blue-500/30 text-blue-100 border-2 border-blue-400 transform scale-105'
                         : 'bg-white/10 hover:bg-white/20 text-white border border-white/20 hover:border-white/40 transform hover:scale-105'
                     }`}
                   >
                     {String.fromCharCode(97 + index)}) {option} 
                     {showResult && index === currentTip.quiz.correctAnswer && ' ✅'}
+                    {selectedAnswer === index && !showResult && (
+                      <span className="ml-2 text-blue-300">●</span>
+                    )}
                   </button>
                 ))}
               </div>
+
+              {/* Submit Button */}
+              {selectedAnswer !== null && !showResult && (
+                <div className="text-center pt-4">
+                  <button
+                    onClick={handleQuizSubmit}
+                    className="px-8 py-3 bg-gradient-to-r from-green-500 to-green-400 hover:from-green-600 hover:to-green-500 text-white rounded-lg font-semibold transition-all duration-300"
+                  >
+                    Valider ma réponse
+                  </button>
+                </div>
+              )}
 
               {/* Result */}
               {showResult && (
@@ -138,7 +176,7 @@ export default function CultureLessonPage() {
                   <div className={`text-xl font-bold mb-6 ${
                     selectedAnswer === currentTip.quiz.correctAnswer ? 'text-green-400' : 'text-red-400'
                   }`}>
-                    {selectedAnswer === currentTip.quiz.correctAnswer ? '🎉 Correct !' : '❌ Incorrect'}
+                    {selectedAnswer === currentTip.quiz.correctAnswer ? '✓ Correct !' : '✗ Incorrect'}
                   </div>
                   
                   <div className="flex justify-center gap-4">
@@ -146,14 +184,22 @@ export default function CultureLessonPage() {
                       onClick={resetLesson}
                       className="px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-400 hover:from-blue-600 hover:to-blue-500 text-white rounded-lg font-semibold transition-all duration-300"
                     >
-                      🔄 Recommencer
+                      Recommencer
                     </button>
-                    <Link
-                      href={`/culture/${country}`}
-                      className="px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-400 hover:from-blue-600 hover:to-blue-500 text-white rounded-lg font-semibold transition-all duration-300"
-                    >
-                      📚 Autres catégories
-                    </Link>
+                    <div className="flex gap-4">
+                      <Link
+                        href={`/culture/${country}`}
+                        className="flex-1 bg-gradient-to-r from-blue-500 to-blue-400 hover:from-blue-600 hover:to-blue-500 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 text-center"
+                      >
+                        Autres catégories
+                      </Link>
+                      <Link
+                        href="/dashboard"
+                        className="flex-1 bg-gradient-to-r from-purple-500 to-purple-400 hover:from-purple-600 hover:to-purple-500 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 text-center"
+                      >
+                        Voir ma progression
+                      </Link>
+                    </div>
                   </div>
                 </div>
               )}
