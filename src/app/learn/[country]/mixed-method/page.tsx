@@ -30,7 +30,7 @@ export default function MixedMethodPage({ params }: { params: Promise<{ country:
         {/* Disabled Content */}
         <div className="max-w-4xl mx-auto">
           <div className="bg-gray-800/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-600/30 text-center opacity-60">
-            <div className="text-6xl mb-6">🔒</div>
+            <div className="text-6xl mb-6 text-gray-400">🔒</div>
             <h2 className="text-2xl font-bold text-gray-300 mb-4">
               Méthode Mixte
             </h2>
@@ -39,15 +39,15 @@ export default function MixedMethodPage({ params }: { params: Promise<{ country:
             </p>
             <div className="space-y-4">
               <div className="flex items-center justify-center space-x-3 text-gray-500">
-                <span className="text-2xl">📝</span>
+                <span className="text-2xl">•</span>
                 <span>Quiz adaptatifs</span>
               </div>
               <div className="flex items-center justify-center space-x-3 text-gray-500">
-                <span className="text-2xl">🎮</span>
+                <span className="text-2xl">•</span>
                 <span>Exercices interactifs</span>
               </div>
               <div className="flex items-center justify-center space-x-3 text-gray-500">
-                <span className="text-2xl">📊</span>
+                <span className="text-2xl">•</span>
                 <span>Suivi des progrès</span>
               </div>
             </div>

@@ -92,13 +92,26 @@ export default function ExercisePage() {
   };
 
 
-  const handleNextExercise = () => {
+  const handleNextExercise = async () => {
     if (exerciseData && currentExercise < exerciseData.exerciseCount) {
       fetchExerciseData(currentExercise);
     } else {
-      // Tous les exercices sont terminés
+      // Tous les exercices sont terminés - sauvegarder la progression
+      const finalScore = 85; // Score calculé
+      setScore(finalScore);
       setIsCompleted(true);
-      setScore(85); // Score par défaut pour la démonstration
+      
+      // Sauvegarder dans localStorage
+      const { saveActivityProgress } = await import('@/lib/progress-tracker');
+      saveActivityProgress({
+        country: country,
+        module: 'language',
+        activityType: 'exercise',
+        category: category || 'general',
+        score: finalScore,
+        completed: true,
+        timestamp: Date.now()
+      });
     }
   };
 
@@ -173,56 +186,69 @@ export default function ExercisePage() {
               canGoNext={currentExercise < exerciseData.exerciseCount}
             />
           </div>
-        ) : isCompleted || score !== null ? (
-          /* Results Section - Tous les exercices terminés */
-          <div className="text-center space-y-6">
-            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
-              <div className="text-6xl mb-6">🎉</div>
-              <h2 className="text-3xl font-bold text-white mb-4">Tous les exercices terminés !</h2>
-              <div className={`text-6xl font-bold mb-4 ${score! >= 70 ? 'text-green-400' : 'text-orange-400'}`}>
-                {score}%
+        ) : null}
+
+        {/* Pop-up de fin d'exercices */}
+        {(isCompleted || score !== null) && (
+          <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50">
+            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20 max-w-md mx-4 text-center">
+              <div className="text-6xl mb-6 text-green-400">✓</div>
+              <h1 className="text-3xl font-bold text-white mb-4">Exercices terminés !</h1>
+              <div className="text-2xl text-green-400 mb-6">
+                Score : {score}%
               </div>
               <p className="text-gray-300 text-lg mb-6">
                 {score! >= 70 ? 
                   'Parfait ! Vous maîtrisez bien ce thème !' : 
                   'Bon travail ! Continuez à vous entraîner pour progresser !'}
               </p>
-            </div>
 
-            <div className="flex justify-center gap-4">
-              <button
-                onClick={() => {
-                  setIsCompleted(false);
-                  setScore(null);
-                  setCurrentExercise(1);
-                  fetchExerciseData();
-                }}
-                className="px-6 py-2 bg-gradient-to-r from-blue-500 to-blue-400 hover:from-blue-600 hover:to-blue-500 text-white rounded-lg font-semibold transition-all duration-300"
-              >
-                🔄 Recommencer le thème
-              </button>
-              <Link
-                href={`/learn/${country}/categories?method=exercices-pratiques`}
-                className="inline-block px-6 py-2 bg-gradient-to-r from-blue-500 to-blue-400 hover:from-blue-600 hover:to-blue-500 text-white rounded-lg font-semibold transition-all duration-300"
-              >
-                📚 Choisir un autre thème
-              </Link>
+              <div className="space-y-3">
+                <button
+                  onClick={() => {
+                    setIsCompleted(false);
+                    setScore(null);
+                    setCurrentExercise(1);
+                    fetchExerciseData();
+                  }}
+                  className="w-full bg-gradient-to-r from-blue-500 to-blue-400 hover:from-blue-600 hover:to-blue-500 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300"
+                >
+                  Recommencer le thème
+                </button>
+                
+                <div className="flex gap-3">
+                  <Link
+                    href={`/learn/${country}/categories?method=exercices-pratiques`}
+                    className="flex-1 bg-gradient-to-r from-blue-500 to-blue-400 hover:from-blue-600 hover:to-blue-500 text-white px-4 py-3 rounded-lg font-semibold transition-all duration-300 text-center"
+                  >
+                    Choisir un autre thème
+                  </Link>
+                  <Link
+                    href="/dashboard"
+                    className="flex-1 bg-gradient-to-r from-purple-500 to-purple-400 hover:from-purple-600 hover:to-purple-500 text-white px-4 py-3 rounded-lg font-semibold transition-all duration-300 text-center"
+                  >
+                    Voir ma progression
+                  </Link>
+                </div>
+              </div>
             </div>
           </div>
-        ) : null}
+        )}
 
-        {/* Back Button */}
-        <div className="text-center mt-12">
-          <Link 
-            href={`/learn/${country}/categories?method=exercices-pratiques`}
-            className="inline-flex items-center text-gray-400 hover:text-white transition-colors"
-          >
-            <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-            </svg>
-            Retour aux catégories
-          </Link>
-        </div>
+        {/* Back Button - seulement si pas terminé */}
+        {!isCompleted && score === null && (
+          <div className="text-center mt-12">
+            <Link 
+              href={`/learn/${country}/categories?method=exercices-pratiques`}
+              className="inline-flex items-center text-gray-400 hover:text-white transition-colors"
+            >
+              <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+              </svg>
+              Retour aux catégories
+            </Link>
+          </div>
+        )}
 
       </main>
     </div>

@@ -11,7 +11,7 @@ export interface QuizQuestion {
 export interface QuizTheme {
   id: string;
   name: string;
-  emoji: string;
+  emoji?: string;
   questions: QuizQuestion[];
 }
 

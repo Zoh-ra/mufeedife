@@ -62,7 +62,7 @@ export default function QuizPage() {
         // Adapter les données au format attendu par le composant
         const data = {
           country: { id: country, name: country, language: country },
-          category: { id: category || '', name: category || '', icon: '📚' },
+          category: { id: category || '', name: category || '', icon: '' },
           questions: questionsData.map((q: { id: string; question: string; options: string[] }) => ({
             id: q.id,
             question_text: q.question,
@@ -88,6 +88,7 @@ export default function QuizPage() {
   const handleAnswerSelect = (answer: string) => {
     setSelectedAnswer(answer);
   };
+
 
   const nextQuestion = async () => {
     if (!quizData || !selectedAnswer || isSubmitting) return;
@@ -125,7 +126,7 @@ export default function QuizPage() {
       setUserAnswers(prev => [...prev, selectedAnswer]);
 
       // Attendre 2 secondes pour montrer le feedback
-      setTimeout(() => {
+      setTimeout(async () => {
         setShowAnswerFeedback(false);
         
         // Passer à la question suivante ou terminer
@@ -137,6 +138,18 @@ export default function QuizPage() {
           const finalScore = [...answerResults, result].filter(r => r.isCorrect).length;
           setScore(finalScore);
           setShowResults(true);
+          
+          // Sauvegarder la progression
+          const { saveActivityProgress } = await import('@/lib/progress-tracker');
+          saveActivityProgress({
+            country: country,
+            module: 'language',
+            activityType: 'quiz',
+            category: quizData.category.name,
+            score: Math.round((finalScore / quizData.questions.length) * 100),
+            completed: true,
+            timestamp: Date.now()
+          });
         }
       }, 2000);
       
@@ -198,7 +211,7 @@ export default function QuizPage() {
         <main className="flex items-center justify-center min-h-[calc(100vh-120px)]">
           <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
-              <div className="text-6xl mb-6">🎉</div>
+              <div className="text-6xl mb-6 text-green-400"></div>
               <h1 className="text-3xl font-bold text-white mb-4">Quiz terminé !</h1>
               <div className="text-2xl text-blue-300 mb-6">
                 Score : {score}/{quizData.questions.length}
@@ -218,12 +231,20 @@ export default function QuizPage() {
                 >
                   Recommencer le quiz
                 </button>
-                <Link
-                  href={`/learn/${country}/categories?method=mini-quiz`}
-                  className="block w-full bg-gradient-to-r from-blue-500 to-blue-400 hover:from-blue-600 hover:to-blue-500 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300"
-                >
-                  Choisir un autre thème
-                </Link>
+                <div className="flex gap-4">
+                  <Link
+                    href={`/learn/${country}/categories?method=mini-quiz`}
+                    className="flex-1 bg-gradient-to-r from-blue-500 to-blue-400 hover:from-blue-600 hover:to-blue-500 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 text-center"
+                  >
+                    Choisir un autre thème
+                  </Link>
+                  <Link
+                    href="/dashboard"
+                    className="flex-1 bg-gradient-to-r from-purple-500 to-purple-400 hover:from-purple-600 hover:to-purple-500 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 text-center"
+                  >
+                    Voir ma progression
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
@@ -290,23 +311,9 @@ export default function QuizPage() {
                         {String.fromCharCode(65 + index)})
                       </span>
                       <span className="flex-1">{option}</span>
-                      {isCorrect && (
-                        <span className="text-green-400 text-2xl ml-2 animate-bounce-in">✓</span>
-                      )}
-                      {isWrong && (
-                        <span className="text-red-400 text-2xl ml-2 animate-shake">✗</span>
-                      )}
                     </div>
                   </button>
                   
-                  {/* Effet de particules pour bonne réponse */}
-                  {isCorrect && (
-                    <div className="absolute inset-0 pointer-events-none">
-                      <div className="absolute top-2 right-2 text-yellow-400 text-xs animate-bounce-in">⭐</div>
-                      <div className="absolute top-4 right-8 text-yellow-400 text-xs animate-bounce-in" style={{animationDelay: '0.1s'}}>✨</div>
-                      <div className="absolute top-6 right-4 text-yellow-400 text-xs animate-bounce-in" style={{animationDelay: '0.2s'}}>⭐</div>
-                    </div>
-                  )}
                 </div>
               );
             })}
@@ -320,9 +327,6 @@ export default function QuizPage() {
                 : 'bg-red-900/30 border-red-400 text-red-100'
             } animate-fade-in`}>
               <div className="flex items-center mb-2">
-                <span className="text-3xl mr-3 animate-bounce-in">
-                  {lastAnswerResult.isCorrect ? '🎉' : '😅'}
-                </span>
                 <span className="font-bold text-lg">
                   {lastAnswerResult.isCorrect ? 'Excellent !' : 'Oups !'}
                 </span>
@@ -330,14 +334,14 @@ export default function QuizPage() {
               {!lastAnswerResult.isCorrect && (
                 <div className="bg-black/20 p-3 rounded-lg mt-3">
                   <p className="text-sm font-medium">
-                    ✅ Bonne réponse : <strong className="text-green-300">{lastAnswerResult.correctAnswer}</strong>
+                    Bonne réponse : <strong className="text-green-300">{lastAnswerResult.correctAnswer}</strong>
                   </p>
                 </div>
               )}
               {lastAnswerResult.explanation && (
                 <div className="bg-blue-900/20 p-3 rounded-lg mt-3">
                   <p className="text-sm">
-                    <span className="text-blue-300 font-medium">💡 Le saviez-vous ?</span><br/>
+                    <span className="text-blue-300 font-medium">ℹ️ Le saviez-vous ?</span><br/>
                     {lastAnswerResult.explanation}
                   </p>
                 </div>
