@@ -15,7 +15,7 @@ export default function CultureLessonPage() {
   const [showQuiz, setShowQuiz] = useState(false);
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const [showResult, setShowResult] = useState(false);
-  const [isCorrect, setIsCorrect] = useState(false);
+  const [, setIsCorrect] = useState(false);
 
   const currentTip = getCulturalTip(decodeURIComponent(country), decodeURIComponent(category));
 

@@ -1637,7 +1637,8 @@ export function getQuizQuestions(country: string, themeId: string): Omit<QuizQue
   if (!theme) return null;
   
   // Retourne les questions SANS les réponses correctes
-  return theme.questions.map(({ correctAnswer: _, ...question }) => question);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  return theme.questions.map(({ correctAnswer, ...question }) => question);
 }
 
 export function validateAnswer(country: string, questionId: string, answerIndex: number): boolean {

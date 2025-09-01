@@ -38,7 +38,7 @@ export async function POST(request: NextRequest) {
     });
 
     // Calculer le score
-    const correctCount = results.filter(r => r.correct).length;
+    const correctCount = results.filter((r: { correct: boolean }) => r.correct).length;
     const totalCount = results.length;
     const score = Math.round((correctCount / totalCount) * 100);
 
