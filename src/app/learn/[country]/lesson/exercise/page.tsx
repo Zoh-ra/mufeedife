@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
+import Header from '../../../../../components/Header';
 import DragDropExercise from '@/components/DragDropExercise';
 
 interface ExercisePhrase {
@@ -94,6 +95,10 @@ export default function ExercisePage() {
   const handleNextExercise = () => {
     if (exerciseData && currentExercise < exerciseData.exerciseCount) {
       fetchExerciseData(currentExercise);
+    } else {
+      // Tous les exercices sont terminés
+      setIsCompleted(true);
+      setScore(85); // Score par défaut pour la démonstration
     }
   };
 
@@ -115,17 +120,7 @@ export default function ExercisePage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
-      {/* Header */}
-      <header className="relative overflow-hidden bg-black/20 backdrop-blur-sm border-b border-white/10">
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-purple-600/20"></div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex items-center justify-between">
-            <Link href="/" className="flex items-center space-x-4">
-              <div className="text-3xl font-bold text-blue-400">MUFEED</div>
-            </Link>
-          </div>
-        </div>
-      </header>
+      <Header country={country} showFlag={true} moduleType="language" />
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -148,7 +143,7 @@ export default function ExercisePage() {
           </div>
         </div>
 
-        {!isCompleted && exerciseData ? (
+        {!isCompleted && exerciseData && !score ? (
           <div className="space-y-4">
             <div className="flex justify-between items-center">
               <h3 className="text-lg font-semibold text-white">
@@ -158,14 +153,14 @@ export default function ExercisePage() {
                 <button
                   onClick={() => fetchExerciseData(currentExercise - 2)}
                   disabled={currentExercise <= 1}
-                  className="px-4 py-2 bg-blue-600 text-white rounded-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="bg-gradient-to-r from-blue-500 to-blue-400 hover:from-blue-600 hover:to-blue-500 text-white px-6 py-2 rounded-lg transition-all duration-300 font-semibold disabled:opacity-50 disabled:cursor-not-allowed disabled:from-gray-600 disabled:to-gray-500"
                 >
                   Précédent
                 </button>
                 <button
                   onClick={() => fetchExerciseData(currentExercise)}
                   disabled={currentExercise >= exerciseData.exerciseCount}
-                  className="px-4 py-2 bg-blue-600 text-white rounded-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="bg-gradient-to-r from-blue-500 to-blue-400 hover:from-blue-600 hover:to-blue-500 text-white px-6 py-2 rounded-lg transition-all duration-300 font-semibold disabled:opacity-50 disabled:cursor-not-allowed disabled:from-gray-600 disabled:to-gray-500"
                 >
                   Suivant
                 </button>
@@ -178,16 +173,19 @@ export default function ExercisePage() {
               canGoNext={currentExercise < exerciseData.exerciseCount}
             />
           </div>
-        ) : isCompleted ? (
-          /* Results Section */
+        ) : isCompleted || score !== null ? (
+          /* Results Section - Tous les exercices terminés */
           <div className="text-center space-y-6">
             <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
-              <h2 className="text-3xl font-bold text-white mb-4">Résultats</h2>
-              <div className={`text-6xl font-bold mb-4 ${score! >= 70 ? 'text-green-400' : 'text-red-400'}`}>
+              <div className="text-6xl mb-6">🎉</div>
+              <h2 className="text-3xl font-bold text-white mb-4">Tous les exercices terminés !</h2>
+              <div className={`text-6xl font-bold mb-4 ${score! >= 70 ? 'text-green-400' : 'text-orange-400'}`}>
                 {score}%
               </div>
-              <p className="text-gray-300 text-lg">
-                {score! >= 70 ? 'Excellent travail !' : 'Continuez à vous entraîner !'}
+              <p className="text-gray-300 text-lg mb-6">
+                {score! >= 70 ? 
+                  'Parfait ! Vous maîtrisez bien ce thème !' : 
+                  'Bon travail ! Continuez à vous entraîner pour progresser !'}
               </p>
             </div>
 
@@ -196,17 +194,18 @@ export default function ExercisePage() {
                 onClick={() => {
                   setIsCompleted(false);
                   setScore(null);
+                  setCurrentExercise(1);
                   fetchExerciseData();
                 }}
-                className="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold transition-all duration-300"
+                className="px-6 py-2 bg-gradient-to-r from-blue-500 to-blue-400 hover:from-blue-600 hover:to-blue-500 text-white rounded-lg font-semibold transition-all duration-300"
               >
-                Recommencer
+                🔄 Recommencer le thème
               </button>
               <Link
                 href={`/learn/${country}/categories?method=exercices-pratiques`}
-                className="inline-block px-8 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-semibold transition-all duration-300"
+                className="inline-block px-6 py-2 bg-gradient-to-r from-blue-500 to-blue-400 hover:from-blue-600 hover:to-blue-500 text-white rounded-lg font-semibold transition-all duration-300"
               >
-                Choisir une autre catégorie
+                📚 Choisir un autre thème
               </Link>
             </div>
           </div>

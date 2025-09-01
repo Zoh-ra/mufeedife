@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
+import Header from '../../../../../components/Header';
 
 interface Question {
   id: string;
@@ -192,14 +193,7 @@ export default function QuizPage() {
   if (showResults) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
-        <header className="relative overflow-hidden bg-black/20 backdrop-blur-sm border-b border-white/10">
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-purple-600/20"></div>
-          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-            <Link href="/" className="flex items-center space-x-4">
-              <div className="text-3xl font-bold text-blue-400">MUFEED</div>
-            </Link>
-          </div>
-        </header>
+        <Header country={country} showFlag={true} moduleType="language" />
 
         <main className="flex items-center justify-center min-h-[calc(100vh-120px)]">
           <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -220,13 +214,13 @@ export default function QuizPage() {
               <div className="space-y-4">
                 <button
                   onClick={resetQuiz}
-                  className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
+                  className="w-full bg-gradient-to-r from-blue-500 to-blue-400 hover:from-blue-600 hover:to-blue-500 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300"
                 >
                   Recommencer le quiz
                 </button>
                 <Link
                   href={`/learn/${country}/categories?method=mini-quiz`}
-                  className="block w-full bg-gray-600 hover:bg-gray-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
+                  className="block w-full bg-gradient-to-r from-blue-500 to-blue-400 hover:from-blue-600 hover:to-blue-500 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300"
                 >
                   Choisir un autre thème
                 </Link>
@@ -240,14 +234,7 @@ export default function QuizPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
-      <header className="relative overflow-hidden bg-black/20 backdrop-blur-sm border-b border-white/10">
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-purple-600/20"></div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <Link href="/" className="flex items-center space-x-4">
-            <div className="text-3xl font-bold text-blue-400">MUFEED</div>
-          </Link>
-        </div>
-      </header>
+      <Header country={country} showFlag={true} moduleType="language" />
 
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* En-tête du quiz */}
@@ -364,7 +351,7 @@ export default function QuizPage() {
           <button
             onClick={previousQuestion}
             disabled={currentQuestionIndex === 0 || showAnswerFeedback}
-            className="flex items-center px-4 py-2 text-gray-400 hover:text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="bg-gradient-to-r from-blue-500 to-blue-400 hover:from-blue-600 hover:to-blue-500 text-white px-6 py-2 rounded-lg transition-all duration-300 font-semibold disabled:opacity-50 disabled:cursor-not-allowed disabled:from-gray-600 disabled:to-gray-500"
           >
             <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
@@ -377,7 +364,7 @@ export default function QuizPage() {
               <button
                 onClick={nextQuestion}
                 disabled={!selectedAnswer || isSubmitting}
-                className="bg-green-600 hover:bg-green-700 disabled:bg-gray-600 disabled:cursor-not-allowed text-white font-semibold py-2 px-6 rounded-lg transition-colors"
+                className="bg-gradient-to-r from-blue-500 to-blue-400 hover:from-blue-600 hover:to-blue-500 text-white px-6 py-2 rounded-lg transition-all duration-300 font-semibold disabled:opacity-50 disabled:cursor-not-allowed disabled:from-gray-600 disabled:to-gray-500"
               >
                 {isSubmitting ? 'Vérification...' : 'Terminer le quiz'}
               </button>
@@ -385,7 +372,7 @@ export default function QuizPage() {
               <button
                 onClick={nextQuestion}
                 disabled={!selectedAnswer || isSubmitting}
-                className="flex items-center bg-blue-600 hover:bg-blue-700 disabled:bg-gray-600 disabled:cursor-not-allowed text-white font-semibold py-2 px-6 rounded-lg transition-colors"
+                className="bg-gradient-to-r from-blue-500 to-blue-400 hover:from-blue-600 hover:to-blue-500 text-white px-6 py-2 rounded-lg transition-all duration-300 font-semibold disabled:opacity-50 disabled:cursor-not-allowed disabled:from-gray-600 disabled:to-gray-500 flex items-center"
               >
                 {isSubmitting ? 'Vérification...' : 'Suivant'}
                 {!isSubmitting && (

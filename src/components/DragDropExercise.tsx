@@ -430,10 +430,10 @@ export default function DragDropExercise({ phrases, onValidate, onNext, canGoNex
             <button
               onClick={handleValidate}
               disabled={matches.length !== phrases.length}
-              className={`px-8 py-3 rounded-lg font-semibold transition-all duration-300 ${
+              className={`px-6 py-2 rounded-lg font-semibold transition-all duration-300 ${
                 matches.length === phrases.length
-                  ? 'bg-blue-600 hover:bg-blue-700 text-white'
-                  : 'bg-gray-600 text-gray-400 cursor-not-allowed'
+                  ? 'bg-gradient-to-r from-blue-500 to-blue-400 hover:from-blue-600 hover:to-blue-500 text-white'
+                  : 'bg-gradient-to-r from-gray-600 to-gray-500 text-gray-400 cursor-not-allowed'
               }`}
             >
               Valider mes réponses ({matches.length}/{phrases.length})
@@ -474,17 +474,17 @@ export default function DragDropExercise({ phrases, onValidate, onNext, canGoNex
             <div className="flex justify-center gap-4">
               <button
                 onClick={handleRetry}
-                className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold transition-all duration-300"
+                className="bg-gradient-to-r from-blue-500 to-blue-400 hover:from-blue-600 hover:to-blue-500 text-white px-6 py-2 rounded-lg transition-all duration-300 font-semibold"
               >
                 🔄 Refaire cet exercice
               </button>
               <button
                 onClick={handleNext}
                 disabled={!canGoNext}
-                className={`px-6 py-3 rounded-lg font-semibold transition-all duration-300 ${
+                className={`px-6 py-2 rounded-lg font-semibold transition-all duration-300 ${
                   canGoNext
-                    ? 'bg-green-600 hover:bg-green-700 text-white'
-                    : 'bg-gray-600 text-gray-400 cursor-not-allowed'
+                    ? 'bg-gradient-to-r from-green-500 to-green-400 hover:from-green-600 hover:to-green-500 text-white'
+                    : 'bg-gradient-to-r from-gray-600 to-gray-500 text-gray-400 cursor-not-allowed'
                 }`}
               >
                 {canGoNext ? '➡️ Exercice suivant' : '✅ Exercices terminés'}

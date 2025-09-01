@@ -3,6 +3,7 @@
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
+import Header from '../../../components/Header';
 
 export default function CountryChoicePage() {
   const params = useParams();
@@ -10,17 +11,7 @@ export default function CountryChoicePage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
-      {/* Header */}
-      <header className="relative overflow-hidden bg-black/20 backdrop-blur-sm border-b border-white/10">
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-purple-600/20"></div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex items-center justify-between">
-            <Link href="/" className="flex items-center space-x-4">
-              <div className="text-3xl font-bold text-blue-400">MUFEED</div>
-            </Link>
-          </div>
-        </div>
-      </header>
+      <Header country={country} showFlag={true} />
 
       {/* Main Content */}
       <main className="flex items-center justify-center min-h-[calc(100vh-120px)]">
