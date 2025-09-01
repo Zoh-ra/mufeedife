@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function MixedMethodPage({ params }: { params: Promise<{ country: string }> }) {
   const { country } = React.use(params);
@@ -14,7 +15,13 @@ export default function MixedMethodPage({ params }: { params: Promise<{ country:
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex items-center justify-between">
             <Link href="/" className="flex items-center space-x-4">
-              <div className="text-3xl font-bold text-blue-400">MUFEED</div>
+              <Image 
+                src="/images/logo/logoMufeed.png" 
+                alt="MUFEED Logo" 
+                width={120}
+                height={48}
+                className="h-12 w-auto"
+              />
             </Link>
           </div>
         </div>

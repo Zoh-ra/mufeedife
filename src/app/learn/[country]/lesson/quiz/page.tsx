@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 
 interface Question {
   id: string;
@@ -196,7 +197,13 @@ export default function QuizPage() {
           <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-purple-600/20"></div>
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
             <Link href="/" className="flex items-center space-x-4">
-              <div className="text-3xl font-bold text-blue-400">MUFEED</div>
+              <Image 
+                src="/images/logo/logoMufeed.png" 
+                alt="MUFEED Logo" 
+                width={120}
+                height={48}
+                className="h-12 w-auto"
+              />
             </Link>
           </div>
         </header>
@@ -244,7 +251,13 @@ export default function QuizPage() {
         <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-purple-600/20"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <Link href="/" className="flex items-center space-x-4">
-            <div className="text-3xl font-bold text-blue-400">MUFEED</div>
+            <Image 
+              src="/images/logo/logoMufeed.png" 
+              alt="MUFEED Logo" 
+              width={120}
+              height={48}
+              className="h-12 w-auto"
+            />
           </Link>
         </div>
       </header>
