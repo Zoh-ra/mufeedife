@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { useParams, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
-import Image from 'next/image';
+import Header from '../../../../components/Header';
 import { getCulturalTip } from '@/lib/cultural-data';
 
 export default function CultureLessonPage() {
@@ -51,23 +51,7 @@ export default function CultureLessonPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
-      {/* Header */}
-      <header className="relative overflow-hidden bg-black/20 backdrop-blur-sm border-b border-white/10">
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-purple-600/20"></div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex items-center justify-between">
-            <Link href="/" className="flex items-center space-x-4">
-              <Image 
-                src="/images/logo/logoMufeed.png" 
-                alt="MUFEED Logo" 
-                width={120}
-                height={48}
-                className="h-12 w-auto"
-              />
-            </Link>
-          </div>
-        </div>
-      </header>
+      <Header country={country} showFlag={true} moduleType="culture" />
 
       {/* Main Content */}
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -109,9 +93,9 @@ export default function CultureLessonPage() {
               <div className="text-center pt-6">
                 <button
                   onClick={handleStartQuiz}
-                  className="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold text-lg transition-all duration-300 transform hover:scale-105"
+                  className="px-8 py-4 bg-gradient-to-r from-blue-500 to-blue-400 hover:from-blue-600 hover:to-blue-500 text-white rounded-lg font-semibold text-lg transition-all duration-300 transform hover:scale-105"
                 >
-                  🎯 Tester mes connaissances
+                  Tester mes connaissances
                 </button>
               </div>
             </div>
@@ -119,7 +103,7 @@ export default function CultureLessonPage() {
             <div className="space-y-8">
               {/* Quiz Section */}
               <div className="bg-blue-500/10 border border-blue-400/30 rounded-lg p-6">
-                <h3 className="text-blue-300 font-bold text-xl mb-6 text-center">🎯 Défi</h3>
+                <h3 className="text-blue-300 font-bold text-xl mb-6 text-center">Défi</h3>
                 <h4 className="text-white text-xl font-semibold mb-6 text-center">
                   {currentTip.quiz.question}
                 </h4>
@@ -135,11 +119,11 @@ export default function CultureLessonPage() {
                     className={`w-full p-4 rounded-lg font-semibold text-lg transition-all duration-300 ${
                       showResult
                         ? index === currentTip.quiz.correctAnswer
-                          ? 'bg-green-600 text-white border-2 border-green-400'
+                          ? 'bg-green-500/20 text-green-300 border-2 border-green-400'
                           : index === selectedAnswer
-                          ? 'bg-red-600 text-white border-2 border-red-400'
-                          : 'bg-gray-600 text-gray-300'
-                        : 'bg-blue-600 hover:bg-blue-700 text-white transform hover:scale-105'
+                          ? 'bg-red-500/20 text-red-300 border-2 border-red-400'
+                          : 'bg-white/5 text-gray-400 border border-white/10'
+                        : 'bg-white/10 hover:bg-white/20 text-white border border-white/20 hover:border-white/40 transform hover:scale-105'
                     }`}
                   >
                     {String.fromCharCode(97 + index)}) {option} 
@@ -160,13 +144,13 @@ export default function CultureLessonPage() {
                   <div className="flex justify-center gap-4">
                     <button
                       onClick={resetLesson}
-                      className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold transition-all duration-300"
+                      className="px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-400 hover:from-blue-600 hover:to-blue-500 text-white rounded-lg font-semibold transition-all duration-300"
                     >
                       🔄 Recommencer
                     </button>
                     <Link
                       href={`/culture/${country}`}
-                      className="px-6 py-3 bg-gray-600 hover:bg-gray-700 text-white rounded-lg font-semibold transition-all duration-300"
+                      className="px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-400 hover:from-blue-600 hover:to-blue-500 text-white rounded-lg font-semibold transition-all duration-300"
                     >
                       📚 Autres catégories
                     </Link>

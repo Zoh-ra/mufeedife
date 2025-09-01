@@ -2,7 +2,7 @@
 
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
-import Image from 'next/image';
+import Header from '../../../components/Header';
 
 // Force refresh - Updated 2025-08-31
 export default function LanguageMethodPage() {
@@ -11,7 +11,7 @@ export default function LanguageMethodPage() {
 
   const methods = [
     {
-      title: 'Mini-jeux et quiz interactifs',
+      title: 'Quiz interactifs',
       description: 'Apprenez en vous amusant avec des jeux éducatifs',
       icon: '🎮',
       slug: 'mini-quiz',
@@ -46,23 +46,7 @@ export default function LanguageMethodPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
-      {/* Header */}
-      <header className="relative overflow-hidden bg-black/20 backdrop-blur-sm border-b border-white/10">
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-purple-600/20"></div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex items-center justify-between">
-            <Link href="/" className="flex items-center space-x-4">
-              <Image 
-                src="/images/logo/logoMufeed.png" 
-                alt="MUFEED Logo" 
-                width={120}
-                height={48}
-                className="h-12 w-auto"
-              />
-            </Link>
-          </div>
-        </div>
-      </header>
+      <Header country={country} showFlag={true} moduleType="language" />
 
       {/* Main Content */}
       <main className="flex items-center justify-center min-h-[calc(100vh-120px)]">
@@ -128,12 +112,12 @@ export default function LanguageMethodPage() {
               // Méthodes avec catégories (quiz et exercices pratiques)
               return (
                 <Link key={index} href={`/learn/${country}/categories?method=${method.slug}`}>
-                  <div className="group bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20 hover:border-white/40 transition-all duration-300 hover:scale-105 cursor-pointer h-full">
+                  <div className="group bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20 hover:border-orange-400 transition-all duration-300 hover:scale-105 cursor-pointer h-full">
                     <div className="flex flex-col items-center space-y-4 h-full justify-center">
                       <div className="text-4xl mb-2">
                         {method.icon}
                       </div>
-                      <h3 className="text-xl font-bold text-white group-hover:text-blue-300 transition-colors">
+                      <h3 className="text-xl font-bold text-white">
                         {method.title}
                       </h3>
                       <p className="text-gray-300 text-sm text-center">

@@ -2,30 +2,14 @@
 
 import React from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
+import Header from '../../../../components/Header';
 
 export default function MixedMethodPage({ params }: { params: Promise<{ country: string }> }) {
   const { country } = React.use(params);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
-      {/* Header */}
-      <header className="relative overflow-hidden bg-black/20 backdrop-blur-sm border-b border-white/10">
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-purple-600/20"></div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex items-center justify-between">
-            <Link href="/" className="flex items-center space-x-4">
-              <Image 
-                src="/images/logo/logoMufeed.png" 
-                alt="MUFEED Logo" 
-                width={120}
-                height={48}
-                className="h-12 w-auto"
-              />
-            </Link>
-          </div>
-        </div>
-      </header>
+      <Header country={country} showFlag={true} moduleType="language" />
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">

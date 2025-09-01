@@ -2,7 +2,7 @@
 
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
-import Image from 'next/image';
+import Header from '../../../components/Header';
 
 export default function CultureCategoriesPage() {
   const params = useParams();
@@ -49,23 +49,7 @@ export default function CultureCategoriesPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
-      {/* Header */}
-      <header className="relative overflow-hidden bg-black/20 backdrop-blur-sm border-b border-white/10">
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-purple-600/20"></div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex items-center justify-between">
-            <Link href="/" className="flex items-center space-x-4">
-              <Image 
-                src="/images/logo/logoMufeed.png" 
-                alt="MUFEED Logo" 
-                width={120}
-                height={48}
-                className="h-12 w-auto"
-              />
-            </Link>
-          </div>
-        </div>
-      </header>
+      <Header country={country} showFlag={true} moduleType="culture" />
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -87,16 +71,16 @@ export default function CultureCategoriesPage() {
               key={index} 
               href={`/culture/${country}/lesson?category=${encodeURIComponent(category.title)}`}
             >
-              <div className="group bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:border-white/30 transition-all duration-300 hover:scale-105 cursor-pointer h-full">
+              <div className="group bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/20 hover:border-green-500 transition-all duration-300 hover:scale-105 cursor-pointer h-full">
                 <div className="flex flex-col items-center space-y-4 h-full justify-between">
                   <div className="flex flex-col items-center space-y-4">
-                    {/* Icon with gradient background */}
-                    <div className={`w-16 h-16 rounded-full bg-gradient-to-r ${category.color} flex items-center justify-center text-2xl group-hover:scale-110 transition-transform duration-300`}>
+                    {/* Icon without gradient background */}
+                    <div className="text-4xl">
                       {category.icon}
                     </div>
                     
                     {/* Title */}
-                    <h3 className="text-xl font-bold text-white text-center group-hover:text-green-300 transition-colors">
+                    <h3 className="text-xl font-bold text-white text-center">
                       {category.title}
                     </h3>
                   </div>
