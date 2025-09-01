@@ -38,8 +38,8 @@ export default function LanguageMethodPage() {
       description: 'Combinez toutes les approches',
       icon: '🔄',
       slug: 'methode-mixte',
-      enabled: true,
-      linkType: 'direct'
+      enabled: false,
+      linkType: 'disabled'
     }
   ];
 
@@ -78,8 +78,8 @@ export default function LanguageMethodPage() {
               // Méthode désactivée
               if (!method.enabled) {
                 return (
-                  <div key={index} className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10 opacity-50 cursor-not-allowed pointer-events-none select-none">
-                    <div className="flex flex-col items-center space-y-4">
+                  <div key={index} className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10 opacity-50 cursor-not-allowed pointer-events-none select-none h-full">
+                    <div className="flex flex-col items-center space-y-4 h-full justify-center">
                       <div className="text-4xl mb-2 opacity-60">
                         {method.icon}
                       </div>
@@ -101,8 +101,8 @@ export default function LanguageMethodPage() {
               if (method.linkType === 'direct') {
                 return (
                   <Link key={index} href={`/learn/${country}/mixed-method`}>
-                    <div className="group bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20 hover:border-white/40 transition-all duration-300 hover:scale-105 cursor-pointer">
-                      <div className="flex flex-col items-center space-y-4">
+                    <div className="group bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20 hover:border-white/40 transition-all duration-300 hover:scale-105 cursor-pointer h-full">
+                      <div className="flex flex-col items-center space-y-4 h-full justify-center">
                         <div className="text-4xl mb-2">
                           {method.icon}
                         </div>
@@ -121,8 +121,8 @@ export default function LanguageMethodPage() {
               // Méthodes avec catégories (quiz et exercices pratiques)
               return (
                 <Link key={index} href={`/learn/${country}/categories?method=${method.slug}`}>
-                  <div className="group bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20 hover:border-white/40 transition-all duration-300 hover:scale-105 cursor-pointer">
-                    <div className="flex flex-col items-center space-y-4">
+                  <div className="group bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20 hover:border-white/40 transition-all duration-300 hover:scale-105 cursor-pointer h-full">
+                    <div className="flex flex-col items-center space-y-4 h-full justify-center">
                       <div className="text-4xl mb-2">
                         {method.icon}
                       </div>
